@@ -8,8 +8,18 @@
  */
 function trimProperties(obj) {
   // ✨ implement
-}
+  const tempKey = Object.keys(obj).reduce((t, {key}) => t + key)
+  const foo = Object.values(obj).reduce((t, {value}) => t + value)  // returns '   jane   '
+  const abbrevValue = foo.trim() // turns into 'jane'
+  
 
+  const newObj = {[tempKey]: abbrevValue}
+
+  console.log('1: ', newObj)
+  return newObj;
+};
+let jane = {name: '     jane       '}
+trimProperties(jane)
 /**
  * [Exercise 2] trimPropertiesMutation trims in place the properties of an object
  * @param {object} obj - an object with properties that are strings
@@ -18,9 +28,24 @@ function trimProperties(obj) {
  * EXAMPLE
  * trimPropertiesMutation({ name: '  jane  ' }) // returns the object mutated in place { name: 'jane' }
  */
+let obj2 = {}
 function trimPropertiesMutation(obj) {
   // ✨ implement
+  // const tempKey = Object.keys(obj).reduce((t, {key}) => t + key)
+  // const foo = Object.values(obj).reduce((t, {value}) => t + value)  // returns '   jane   '
+  // const abbrevValue = foo.trim() // turns into 'jane'
+  // newObj = {[tempKey]: abbrevValue}
+  // obj = newObj
+  // console.log('2: ', obj)
+  // return obj
+  const newObj = JSON.parse(JSON.stringify(obj).replace(/"\s+|\s+"/g,'"'))
+  obj2 = newObj
+  return obj2
 }
+trimPropertiesMutation(jane)
+console.log(obj2)
+jane = trimPropertiesMutation(jane)
+console.log('jane global post func 2: ', jane)
 
 /**
  * [Exercise 3] findLargestInteger finds the largest integer in an array of integers
@@ -32,7 +57,11 @@ function trimPropertiesMutation(obj) {
  */
 function findLargestInteger(integers) {
   // ✨ implement
+  const maxim = Math.max(...integers)
+  console.log(maxim)
+  return maxim
 }
+findLargestInteger([1,2,3,7,5,4])
 
 class Counter {
   /**
@@ -41,8 +70,13 @@ class Counter {
    */
   constructor(initialNumber) {
     // ✨ initialize whatever properties are needed
+    countDown: () => {
+      for(let i = initialNumber; i > 0; i--) {
+        initialNumber -= 1
+      }
+      return input
+    }
   }
-
   /**
    * [Exercise 4B] Counter.prototype.countDown counts down to zero
    * @returns {number} - the next count, does not go below zero
@@ -57,6 +91,7 @@ class Counter {
    */
   countDown() {
     // ✨ implement
+    
   }
 }
 
